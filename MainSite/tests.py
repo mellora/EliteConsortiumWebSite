@@ -1,4 +1,5 @@
 from django.test import TestCase
+from .models import Pricing
 
 
 # Create your tests here.

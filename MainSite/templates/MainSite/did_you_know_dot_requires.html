@@ -1,4 +1,5 @@
 {% extends 'MainSite/base.html' %}
+{% load static %}
 
 {% block title %}
 Did you know DOT requires...
@@ -13,7 +14,7 @@ Did you know DOT requires...
 {% endblock %}
 
 {% block content %}
-<div class="container bg-light p-3 pb-5">
+<div>
     <div>
         <h2>
             The following is a brief summary of the Department of Transportation and the Federal Highway Administration
@@ -125,7 +126,9 @@ Did you know DOT requires...
                 <p>
                     This table notes when a post-accident test is required to be conducted. Table from 382.303(a)(3)
                 </p>
-                <img src="" alt="Post-accident test requirements.">
+                <p>
+                    <img src="{% static 'MainSite/images/post-accident_test_table.jpg' %}" alt="Post-accident test requirements." class="table">
+                </p>
             </div>
         </div>
         <div>

@@ -21,3 +21,17 @@ div.did_you_know_dot_requires_banner {
 div.contact_us_banner {
     background: grey url() no-repeat;
 }
+
+dd {
+    margin-left: 2em;
+}
+
+img.table {
+    width: 100%;
+    height: auto;
+}
+
+img.contact_us {
+    width: 100%;
+    height: auto;
+}
