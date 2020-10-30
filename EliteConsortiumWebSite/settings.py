@@ -14,8 +14,8 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-from django.core.exceptions import ImproperlyConfigured
-from django.core.management.utils import get_random_secret_key
+from django.core.exceptions import ImproperlyConfigured  # Exception is raised if SECRET_KEY has no value
+from django.core.management.utils import get_random_secret_key  # Used to auto generate a new secret key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
