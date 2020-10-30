@@ -14,8 +14,8 @@ Did you know DOT requires...
 {% endblock %}
 
 {% block content %}
-<div>
-    <div>
+<div class="container-fluid">
+    <div class="row">
         <h2>
             The following is a brief summary of the Department of Transportation and the Federal Highway Administration
             drug and alcohol testing requirements.
@@ -25,7 +25,7 @@ Did you know DOT requires...
             Regulations under the section numbers provided.
         </p>
     </div>
-    <div>
+    <div class="row">
         <h3>
             Who must be tested?
         </h3>
@@ -37,7 +37,7 @@ Did you know DOT requires...
             a CDL.
         </p>
     </div>
-    <div>
+    <div class="row">
         <h3>
             Implementation Dates
         </h3>
@@ -49,32 +49,34 @@ Did you know DOT requires...
             testing program that conforms to the DOT regulations.
         </p>
     </div>
-    <div>
+    <div class="row">
         <h3>
             Testing for what?
         </h3>
         <h4>
             (382.107 and 40.21)
         </h4>
-        <p>
-            As specified by the DOT, the company must test only for alcohol and the following five drugs:
-        </p>
-        <ul>
-            <li>
-                marijuana
-            </li>
-            <li>
-                cocaine
-            </li>
-            <li>
-                opiates
-            </li>
-            <li>
-                amphetamines
-            </li>
-        </ul>
+        <div>
+            <p>
+                As specified by the DOT, the company must test only for alcohol and the following five drugs:
+            </p>
+            <ul>
+                <li>
+                    marijuana
+                </li>
+                <li>
+                    cocaine
+                </li>
+                <li>
+                    opiates
+                </li>
+                <li>
+                    amphetamines
+                </li>
+            </ul>
+        </div>
     </div>
-    <div>
+    <div class="row">
         <h3>
             What tests are required?
         </h3>
@@ -127,7 +129,8 @@ Did you know DOT requires...
                     This table notes when a post-accident test is required to be conducted. Table from 382.303(a)(3)
                 </p>
                 <p>
-                    <img src="{% static 'MainSite/images/post-accident_test_table.jpg' %}" alt="Post-accident test requirements." class="table">
+                    <img src="{% static 'MainSite/images/post-accident_test_table.jpg' %}"
+                         alt="Post-accident test requirements." class="table">
                 </p>
             </div>
         </div>
@@ -234,7 +237,7 @@ Did you know DOT requires...
             </div>
         </div>
     </div>
-    <div>
+    <div class="row">
         <h3>
             Collection/test site
         </h3>
@@ -255,7 +258,7 @@ Did you know DOT requires...
             </p>
         </div>
     </div>
-    <div>
+    <div class="row">
         <h3>
             What are certified testing laboratories?
         </h3>
@@ -271,7 +274,7 @@ Did you know DOT requires...
             </p>
         </div>
     </div>
-    <div>
+    <div class="row">
         <h3>
             What is an MRO? (Medical Review Officer)
         </h3>
@@ -293,7 +296,7 @@ Did you know DOT requires...
             </p>
         </div>
     </div>
-    <div>
+    <div class="row">
         <h3>
             What is a BAT? (Breath Alcohol Technican)
         </h3>
@@ -308,7 +311,7 @@ Did you know DOT requires...
             </p>
         </div>
     </div>
-    <div>
+    <div class="row">
         <h3>
             What are split samples?
         </h3>
@@ -325,7 +328,7 @@ Did you know DOT requires...
             </p>
         </div>
     </div>
-    <div>
+    <div class="row">
         <h3>
             Handling test results
         </h3>
@@ -348,7 +351,7 @@ Did you know DOT requires...
             </p>
         </div>
     </div>
-    <div>
+    <div class="row">
         <h3>
             Notification Requirements
         </h3>
@@ -371,7 +374,7 @@ Did you know DOT requires...
             </p>
         </div>
     </div>
-    <div>
+    <div class="row">
         <h3>
             If a Driver Refuses a Test
         </h3>
@@ -386,7 +389,7 @@ Did you know DOT requires...
             </p>
         </div>
     </div>
-    <div>
+    <div class="row">
         <h3>
             Record-Keeping Requirements
         </h3>
@@ -407,7 +410,7 @@ Did you know DOT requires...
             </p>
         </div>
     </div>
-    <div>
+    <div class="row">
         <h3>
             Training for Supervisors
         </h3>
