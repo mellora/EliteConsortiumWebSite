@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from.models import Pricing
 
 
 # Create your views here.
@@ -15,7 +16,8 @@ def what_can_elite_do_for_you(request):
 
 
 def pricing(request):
-    return render(request, 'MainSite/pricing.html')
+    prices = Pricing.objects.all()
+    return render(request, 'MainSite/pricing.html', {'prices': prices})
 
 
 def did_you_know_dot_requires(request):
