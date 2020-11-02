@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from.models import Pricing
+from .models import NonMemberConsortiumPricing, MemberConsortiumPricing
 
 
 # Create your views here.
@@ -16,8 +16,13 @@ def what_can_elite_do_for_you(request):
 
 
 def pricing(request):
-    prices = Pricing.objects.all()
-    return render(request, 'MainSite/pricing.html', {'prices': prices})
+    non_member_prices = NonMemberConsortiumPricing.objects.all()
+    member_prices = MemberConsortiumPricing.objects.all()
+    context = {
+        'non_member_prices': non_member_prices,
+        'member_prices': member_prices
+    }
+    return render(request, 'MainSite/pricing.html', context)
 
 
 def did_you_know_dot_requires(request):

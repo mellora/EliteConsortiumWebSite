@@ -17,10 +17,44 @@ Pricing
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                Test 1
+                <table class="pricing-table">
+                    {% for price in non_member_prices %}
+                    {% if price.extra_cost == 0 %}
+                    <tr>
+                        <td>{{ price.service_name }}</td>
+                        <td>${{ price.price }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td>{{ price.service_name }}</td>
+                        <td>${{ price.extra_cost }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </table>
             </div>
             <div class="col">
-                Test 2
+                <table class="pricing-table">
+                    {% for price in member_prices %}
+                    {% if price.extra_cost == 0 %}
+                    <tr>
+                        <td>{{ price.service_name }}</td>
+                        <td>
+                            {% if price.min_price == price.max_price %}
+                            ${{ price.min_price }}
+                            {% else %}
+                            ${{ price.min_price }}-${{ price.max_price }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td>{{ price.service_name }}</td>
+                        <td>${{ price.extra_cost }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </table>
             </div>
         </div>
     </div>
