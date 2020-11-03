@@ -47,7 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # The Main website app
     'MainSite.apps.MainsiteConfig',
+    # Random Pulling App
+    'RandomPuller.apps.RandompullerConfig',
 ]
 
 MIDDLEWARE = [
