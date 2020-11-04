@@ -101,3 +101,10 @@ class CompanyAndEmployeeModelTest(TestCase):
         self.assertEqual(employee_list_1[2].company_name, new_company_1)
         self.assertEqual(employee_list_2[0].company_name, new_company_2)
         self.assertEqual(employee_list_2[1].company_name, new_company_2)
+
+
+class TemplateTest(TestCase):
+
+    def test_index(self):
+        response = self.client.get('/random/')
+        self.assertTemplateUsed(response, template_name='RandomPuller/index.html')
