@@ -1,0 +1,44 @@
+{% extends 'RandomPuller/base.html' %}
+
+{% block title %}
+Random Puller
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <h1>Randoms for {{ company }}</h1>
+    </div>
+    <div class="row">
+        <table name="pulled_employees">
+            <tr>
+                <td></td>
+                <th>Randoms Pulled</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Last Name, First Name</td>
+            </tr>
+            {% for employee in random_list %}
+            <tr>
+                <td>{{ forloop.counter }}:</td>
+                <td>{{ employee.last_name }}, {{ employee.first_name }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <th>Alternates Pulled</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Last Name, First Name</td>
+            </tr>
+            {% for employee in alternate_list %}
+            {% endfor %}
+        </table>
+    </div>
+    <div class="row">
+
+    </div>
+</div>
+{% endblock %}

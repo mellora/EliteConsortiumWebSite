@@ -32,7 +32,7 @@ Random Puller
         <h3>{{selected_company.name}}</h3>
     </div>
     <div class="row">
-        <form name="company_pull_settings" method="POST">
+        <form name="company_pull_settings" action="{% url 'RandomPuller:pulled_employees' %}" method="POST">
             {% csrf_token %}
             <table>
                 <tr>
@@ -40,7 +40,7 @@ Random Puller
                         <label for="rand_num">Number of Randoms to Pull:</label>
                     </td>
                     <td>
-                        <input name="random_number_to_pull" id="rand_num" type="text" placeholder="{{ selected_company.number_of_randoms }}">
+                        <input name="random_number_to_pull" id="rand_num" type="number" value="{{ selected_company.number_of_randoms }}">
                     </td>
                 </tr>
                 <tr>
@@ -48,10 +48,11 @@ Random Puller
                         <label for="alt_num">Number of Alternates to Pull:</label>
                     </td>
                     <td>
-                        <input name="alternate_number_to_pull" id="alt_num" placeholder="{{ selected_company.number_of_alternates }}">
+                        <input name="alternate_number_to_pull" id="alt_num" type="number" value="{{ selected_company.number_of_alternates }}">
                     </td>
                 </tr>
             </table>
+            <input name="company_name" hidden="true" type="text" value="{{ selected_company.name }}">
             <input type="submit" name="Submit">
         </form>
     </div>
