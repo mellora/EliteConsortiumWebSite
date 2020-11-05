@@ -18,6 +18,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('MainSite.urls')),
-    path('random/', include('RandomPuller.urls')),
+    path('', include('MainSite.urls'), name='MainSite'),
+    path('random/', include('RandomPuller.urls'), name='RandomPuller'),
 ]

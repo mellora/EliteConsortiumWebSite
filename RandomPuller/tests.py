@@ -108,3 +108,7 @@ class TemplateTest(TestCase):
     def test_index(self):
         response = self.client.get('/random/')
         self.assertTemplateUsed(response, template_name='RandomPuller/index.html')
+
+    def test_random_puller(self):
+        response = self.client.get('/random/random_puller/')
+        self.assertTemplateUsed(response, template_name='RandomPuller/random_puller.html')
