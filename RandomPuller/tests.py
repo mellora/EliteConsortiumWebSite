@@ -112,3 +112,7 @@ class TemplateTest(TestCase):
     def test_random_puller(self):
         response = self.client.get('/random/random_puller/')
         self.assertTemplateUsed(response, template_name='RandomPuller/random_puller.html')
+
+    def test_pulled_employees(self):
+        response = self.client.get('/random/pulled_employees/')
+        self.assertTemplateUsed(response, template_name='RandomPuller/pulled_employees.html')

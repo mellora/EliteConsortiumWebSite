@@ -32,7 +32,7 @@ Random Puller
         <h3>{{selected_company.name}}</h3>
     </div>
     <div class="row">
-        <form>
+        <form name="company_pull_settings" method="POST">
             {% csrf_token %}
             <table>
                 <tr>
