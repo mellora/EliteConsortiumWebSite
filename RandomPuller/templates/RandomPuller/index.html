@@ -11,22 +11,37 @@ Random Puller
             Please Select a company to pull from
         </h1>
     </div>
-    <br>
     <div class="row">
         <div class="col">
-            {% for company in companies %}
-            <form name="select_{{ company.name }}" method="POST"
-                  action="{% url 'RandomPuller:company_employees' company.name.split|join:'_' %}">
-                {% csrf_token %}
-                <label for="id_select_{{ company.name }}">{{ company.name }}</label>
-                <input type="submit" value="Select" id="id_select_{{ company.name }}">
-            </form>
-            {% endfor %}
+            <table class="table">
+                <thead>
+                <tr class="row">
+                    <th class="col">Company</th>
+                    <th class="col"></th>
+                    <th class="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for company in companies %}
+                <tr class="row">
+                    <td class="col">{{ company.name }}</td>
+                    <td class="col">
+                        <a href="{% url 'RandomPuller:company_employees' company.name.split|join:'_' %}"
+                           class="btn btn-secondary">Select</a>
+                    </td>
+                    <td class="col">
+                        <a href="{% url 'RandomPuller:delete_company' company.pk %}"
+                           class="btn btn-warning">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <a href="">Test</a>
+            <a href="#" class="btn btn-primary">Add New Company</a>
         </div>
     </div>
 </div>

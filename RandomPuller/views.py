@@ -4,8 +4,6 @@ import random
 
 from .models import Company, Employee
 
-SHUFFLE_NUMBER = 5
-
 
 # Create your views here.
 def index(request):
@@ -18,15 +16,32 @@ def index(request):
 
 
 def company_employees(request, name_of_company):
-    if request.method == 'POST':
-        company_name = name_of_company.replace('_', ' ')
-        company = Company.objects.filter(name=company_name).first()
-        employees = Employee.objects.filter(company_name=company)
-    else:
-        company = None
-        employees = None
+    company_name = name_of_company.replace('_', ' ')
+    company = Company.objects.filter(name=company_name).first()
+    employees = Employee.objects.filter(company_name=company)
+
     context = {
         'company': company,
         'employees': employees,
     }
     return render(request, 'RandomPuller/company_employees.html', context)
+
+
+def add_company(request):
+    pass
+
+
+def delete_company(request, pk):
+    Company.objects.filter(pk=pk).delete()
+    return redirect('RandomPuller:index')
+
+
+def add_employee(request):
+    pass
+
+
+def delete_employee(request, pk):
+    employee = Employee.objects.filter(pk=pk).first()
+    company = Company.objects.filter(pk=employee.company_name.pk).first()
+    Employee.objects.filter(pk=pk).delete()
+    return redirect('RandomPuller:company_employees', name_of_company=company.name.replace(' ', '_'))

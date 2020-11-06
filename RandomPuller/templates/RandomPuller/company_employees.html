@@ -13,14 +13,32 @@ Random Puller
     </div>
     <div class="row">
         <div class="col">
-            <table>
+            <table class="table">
+                <thead>
+                <tr class="row">
+                    <th class="col">Last Name:</th>
+                    <th class="col">First Name:</th>
+                    <th class="col"></th>
+                </tr>
+                </thead>
+                <tbody>
                 {% for employee in employees %}
-                <tr>
-                    <td>{{ employee.last_name }}</td>
-                    <td>{{ employee.first_name }}</td>
+                <tr class="row">
+                    <td class="col">{{ employee.last_name }}</td>
+                    <td class="col">{{ employee.first_name }}</td>
+                    <td class="col">
+                        <a href="{% url 'RandomPuller:delete_employee' employee.pk %}"
+                           class="btn btn-warning">Remove</a>
+                    </td>
                 </tr>
                 {% endfor %}
+                </tbody>
             </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a href="#" class="btn btn-primary">Add New Employee</a>
         </div>
     </div>
 </div>
