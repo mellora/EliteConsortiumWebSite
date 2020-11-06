@@ -17,60 +17,16 @@ def index(request):
     return render(request, 'RandomPuller/index.html', context)
 
 
-def random_puller(request):
+def company_employees(request, name_of_company):
     if request.method == 'POST':
-        selected_company_name = request.POST.get('company_select')
-        selected_company = Company.objects.filter(name=selected_company_name).first()
-        employee_list = Employee.objects.filter(company_name__name=selected_company_name)
+        company_name = name_of_company.replace('_', ' ')
+        company = Company.objects.filter(name=company_name).first()
+        employees = Employee.objects.filter(company_name=company)
     else:
-        selected_company = None
-        employee_list = None
-
-    companies = Company.objects.all()
-
+        company = None
+        employees = None
     context = {
-        'companies': companies,
-        'employees': employee_list,
-        'selected_company': selected_company,
+        'company': company,
+        'employees': employees,
     }
-    return render(request, 'RandomPuller/random_puller.html', context)
-
-
-def pulled_employees(request):
-    if request.method == 'POST':
-        try:
-            rand_pull = int(request.POST.get('random_number_to_pull'))
-        except ValueError:
-            rand_pull = 0
-        try:
-            alt_pull = int(request.POST.get('alternate_number_to_pull'))
-        except ValueError:
-            alt_pull = 0
-        company_name = request.POST.get('company_name')
-    else:
-        rand_pull = 0
-        alt_pull = 0
-        company_name = None
-
-    employee_list = list(Employee.objects.filter(company_name__name=company_name))
-
-    if rand_pull + alt_pull >= len(employee_list):
-        return redirect('/random/')
-
-    for _ in range(SHUFFLE_NUMBER):
-        random.shuffle(employee_list)
-
-    random_employee_list = []
-    for pull in range(rand_pull):
-        random_employee_list.append(employee_list.pop(0))
-
-    alternate_employee_list = []
-    for pull in range(alt_pull):
-        alternate_employee_list.append(employee_list.pop(0))
-
-    context = {
-        'company': company_name,
-        'random_list': random_employee_list,
-        'alternate_list': alternate_employee_list,
-    }
-    return render(request, 'RandomPuller/pulled_employees.html', context)
+    return render(request, 'RandomPuller/company_employees.html', context)

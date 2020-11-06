@@ -1,0 +1,27 @@
+{% extends 'RandomPuller/base.html' %}
+
+{% block title %}
+Random Puller
+{% endblock %}
+
+{% block content %}
+<div class="col">
+    <div class="row">
+        <div class="col">
+            <h1>{{ company }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table>
+                {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.last_name }}</td>
+                    <td>{{ employee.first_name }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

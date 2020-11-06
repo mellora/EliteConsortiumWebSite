@@ -5,7 +5,7 @@ Random Puller
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
+<div class="col">
     <div class="row">
         <h1>
             Please Select a company to pull from
@@ -13,15 +13,21 @@ Random Puller
     </div>
     <br>
     <div class="row">
-        <form name="select_company_form" action="{% url 'RandomPuller:random_puller' %}" method="POST">
-            {% csrf_token %}
-            <select name="company_select">
-                <option selected="selected" disabled>Companies:</option>
-                {% for company in companies %}
-                <option value="{{ company.name }}">{{ company.name }}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Select">
-        </form>
+        <div class="col">
+            {% for company in companies %}
+            <form name="select_{{ company.name }}" method="POST"
+                  action="{% url 'RandomPuller:company_employees' company.name.split|join:'_' %}">
+                {% csrf_token %}
+                <label for="id_select_{{ company.name }}">{{ company.name }}</label>
+                <input type="submit" value="Select" id="id_select_{{ company.name }}">
+            </form>
+            {% endfor %}
+        </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <a href="">Test</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
