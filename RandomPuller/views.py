@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect
 
 import random
 
 from .models import Company, Employee
+from .forms import CompanyForm
 
 
 # Create your views here.
@@ -18,7 +19,7 @@ def index(request):
 def company_employees(request, name_of_company):
     company_name = name_of_company.replace('_', ' ')
     company = Company.objects.filter(name=company_name).first()
-    employees = Employee.objects.filter(company_name=company)
+    employees = Employee.objects.filter(company=company)
 
     context = {
         'company': company,
@@ -27,13 +28,34 @@ def company_employees(request, name_of_company):
     return render(request, 'RandomPuller/company_employees.html', context)
 
 
+def new_company(request):
+    c_form = CompanyForm
+    context = {
+        'form': c_form
+    }
+    return render(request, 'RandomPuller/add_company.html', context)
+
+
 def add_company(request):
-    pass
+    if request.method == "POST":
+        form = CompanyForm(request.POST)
+        if form.is_valid():
+            company = Company()
+            company.name = form.cleaned_data['name']
+            company.number_of_randoms = form.cleaned_data['number_of_randoms']
+            company.number_of_alternates = form.cleaned_data['number_of_alternates']
+            company.save()
+            return redirect('RandomPuller:index')
+    return redirect('RandomPuller:new_company')
 
 
 def delete_company(request, pk):
     Company.objects.filter(pk=pk).delete()
     return redirect('RandomPuller:index')
+
+
+def new_employee(request):
+    pass
 
 
 def add_employee(request):

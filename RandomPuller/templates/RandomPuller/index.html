@@ -17,6 +17,8 @@ Random Puller
                 <thead>
                 <tr class="row">
                     <th class="col">Company</th>
+                    <th class="col">Default Number of Randoms</th>
+                    <th class="col">Default Number of Randoms</th>
                     <th class="col"></th>
                     <th class="col"></th>
                 </tr>
@@ -25,13 +27,15 @@ Random Puller
                 {% for company in companies %}
                 <tr class="row">
                     <td class="col">{{ company.name }}</td>
+                    <td class="col">{{ company.number_of_randoms }}</td>
+                    <td class="col">{{ company.number_of_alternates }}</td>
                     <td class="col">
                         <a href="{% url 'RandomPuller:company_employees' company.name.split|join:'_' %}"
-                           class="btn btn-secondary">Select</a>
+                           class="btn btn-success">Select/Modify</a>
                     </td>
                     <td class="col">
                         <a href="{% url 'RandomPuller:delete_company' company.pk %}"
-                           class="btn btn-warning">Remove</a>
+                           class="btn btn-danger">Remove</a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -41,7 +45,7 @@ Random Puller
     </div>
     <div class="row">
         <div class="col">
-            <a href="#" class="btn btn-primary">Add New Company</a>
+            <a href="{% url 'RandomPuller:new_company' %}" class="btn btn-primary">Add New Company</a>
         </div>
     </div>
 </div>

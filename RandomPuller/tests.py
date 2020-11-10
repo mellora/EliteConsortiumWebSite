@@ -144,13 +144,25 @@ class CompanyAndEmployeeModelTest(TestCase):
         self.assertEqual(employee_list_2[1].company_name, new_company_2)
 
 
-class TemplateTest(TestCase):
+class ViewAndTemplateTest(TestCase):
 
-    def test_index(self):
+    def test_index_template(self):
         response = self.client.get('/random/')
         self.assertTemplateUsed(response, template_name='RandomPuller/index.html')
 
-    def test_company_employees(self):
+    def test_company_employees_template(self):
         response = self.client.get('/random/company/test/')
         self.assertTemplateUsed(response, template_name='RandomPuller/company_employees.html')
+
+    def test_add_company_view(self):
+        pass
+
+    def test_delete_company_view(self):
+        pass
+
+    def test_add_employee_view(self):
+        pass
+
+    def test_delete_employee_view(self):
+        pass
 
