@@ -13,47 +13,37 @@ Pricing
 {% endblock %}
 
 {% block content %}
-<div>
-    <div class="container-fluid">
+<div class="row">
+    <div class="col">
         <div class="row">
             <div class="col">
-                <table class="pricing-table">
-                    {% for price in non_member_prices %}
-                    {% if price.extra_cost == 0 %}
-                    <tr>
-                        <td>{{ price.service_name }}</td>
-                        <td>${{ price.price }}</td>
+                <table name="non_member_pricing" class="table">
+                    <thead>
+                    <tr class="row">
+                        <th class="col">Non-Consortium Member Pricing</th>
                     </tr>
-                    {% else %}
-                    <tr>
-                        <td>{{ price.service_name }}</td>
-                        <td>${{ price.extra_cost }}</td>
+                    </thead>
+                    <tbody>
+                    <tr class="row">
+                        <td class="col">Drug testing Collection Only</td>
+                        <td class="col">$20.00</td>
                     </tr>
-                    {% endif %}
-                    {% endfor %}
+                    </tbody>
                 </table>
             </div>
             <div class="col">
-                <table class="pricing-table">
-                    {% for price in member_prices %}
-                    {% if price.extra_cost == 0 %}
-                    <tr>
-                        <td>{{ price.service_name }}</td>
-                        <td>
-                            {% if price.min_price == price.max_price %}
-                            ${{ price.min_price }}
-                            {% else %}
-                            ${{ price.min_price }}-${{ price.max_price }}
-                            {% endif %}
-                        </td>
+                <table name="member_pricing" class="table">
+                    <thead>
+                    <tr class="row">
+                        <th class="col">Consortium Member Pricing</th>
                     </tr>
-                    {% else %}
-                    <tr>
-                        <td>{{ price.service_name }}</td>
-                        <td>${{ price.extra_cost }}</td>
+                    </thead>
+                    <tbody>
+                    <tr class="row">
+                        <td class="col">Program yearly fee to be billed on the anniversary date</td>
+                        <td class="col">$150.00</td>
                     </tr>
-                    {% endif %}
-                    {% endfor %}
+                    </tbody>
                 </table>
             </div>
         </div>

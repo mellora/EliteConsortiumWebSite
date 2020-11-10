@@ -14,17 +14,19 @@ Contact Us
 {% endblock %}
 
 {% block content %}
-<div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm">
-                <img src="{% static 'MainSite/images/office_building_img.jpg' %}" alt="Greenview Office" class="contact_us">
-            </div>
-            <div class="col-sm">
-                <img src="{% static 'MainSite/images/google_maps_location_img.jpg' %}" alt="Greenview Office" class="contact_us">
-            </div>
+<div class="col">
+    <div class="row">
+        <div class="col-sm">
+            <img src="{% static 'MainSite/images/office_building_img.jpg' %}" alt="Greenview Office"
+                 class="contact_us">
         </div>
-        <div class="row">
+        <div class="col-sm">
+            <img src="{% static 'MainSite/images/google_maps_location_img.jpg' %}" alt="Greenview Office"
+                 class="contact_us">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
             <dl>
                 <dt>
                     Directions to the office:
