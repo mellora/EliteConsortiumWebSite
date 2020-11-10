@@ -7,6 +7,9 @@ class Company(models.Model):
     number_of_randoms = models.IntegerField(null=True, blank=True)
     number_of_alternates = models.IntegerField(null=True, blank=True)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
 

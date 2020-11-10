@@ -1,0 +1,42 @@
+{% extends 'RandomPuller/base.html' %}
+
+{% block title %}
+Add Company
+{% endblock %}
+
+{% block content %}
+<div class="col">
+    <div class="row">
+        <div class="col">
+            <h1>
+                Add New Employee to {{ company.name }}
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form name="add_employee" method="POST" action="{% url 'RandomPuller:add_employee' company.pk %}">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            {{ form.first_name.label_tag }}
+                            {{ form.first_name }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            {{ form.last_name.label_tag }}
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+                </div>
+                {{ form.company }}
+                <input type="submit" class="btn btn-success">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
