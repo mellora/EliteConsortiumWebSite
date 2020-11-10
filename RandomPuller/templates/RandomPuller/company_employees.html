@@ -1,0 +1,45 @@
+{% extends 'RandomPuller/base.html' %}
+
+{% block title %}
+Random Puller
+{% endblock %}
+
+{% block content %}
+<div class="col">
+    <div class="row">
+        <div class="col">
+            <h1>{{ company }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                <tr class="row">
+                    <th class="col">Last Name:</th>
+                    <th class="col">First Name:</th>
+                    <th class="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for employee in employees %}
+                <tr class="row">
+                    <td class="col">{{ employee.last_name }}</td>
+                    <td class="col">{{ employee.first_name }}</td>
+                    <td class="col">
+                        <a href="{% url 'RandomPuller:delete_employee' employee.pk %}"
+                           class="btn btn-warning">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a href="#" class="btn btn-primary">Add New Employee</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

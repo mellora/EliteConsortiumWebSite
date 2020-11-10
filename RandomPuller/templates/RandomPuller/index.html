@@ -5,23 +5,48 @@ Random Puller
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
+<div class="col">
     <div class="row">
         <h1>
             Please Select a company to pull from
         </h1>
     </div>
-    <br>
     <div class="row">
-        <form name="select_company_form" action="{% url 'RandomPuller:random_puller' %}" method="POST">
-            {% csrf_token %}
-            <select name="company_select">
-                <option selected="selected" disabled>Companies:</option>
+        <div class="col">
+            <table class="table">
+                <thead>
+                <tr class="row">
+                    <th class="col">Company</th>
+                    <th class="col">Default Number of Randoms</th>
+                    <th class="col">Default Number of Randoms</th>
+                    <th class="col"></th>
+                    <th class="col"></th>
+                </tr>
+                </thead>
+                <tbody>
                 {% for company in companies %}
-                <option value="{{ company.name }}">{{ company.name }}</option>
+                <tr class="row">
+                    <td class="col">{{ company.name }}</td>
+                    <td class="col">{{ company.number_of_randoms }}</td>
+                    <td class="col">{{ company.number_of_alternates }}</td>
+                    <td class="col">
+                        <a href="{% url 'RandomPuller:company_employees' company.name.split|join:'_' %}"
+                           class="btn btn-success">Select/Modify</a>
+                    </td>
+                    <td class="col">
+                        <a href="{% url 'RandomPuller:delete_company' company.pk %}"
+                           class="btn btn-danger">Remove</a>
+                    </td>
+                </tr>
                 {% endfor %}
-            </select>
-            <input type="submit" value="Select">
-        </form>
+                </tbody>
+            </table>
+        </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'RandomPuller:new_company' %}" class="btn btn-primary">Add New Company</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

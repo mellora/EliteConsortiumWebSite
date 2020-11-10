@@ -42,6 +42,20 @@ class CompanyModelTest(TestCase):
         self.assertEqual(second_saved_company.number_of_randoms, new_company_2.number_of_randoms)
         self.assertEqual(second_saved_company.number_of_alternates, new_company_2.number_of_alternates)
 
+    def test_delete_company(self):
+        new_company_1 = Company(name='Elite Consortium', number_of_randoms=2)
+        new_company_1.save()
+
+        new_company_2 = Company(name='Kind Properties', number_of_randoms=5, number_of_alternates=2)
+        new_company_2.save()
+
+        saved_companies = Company.objects.all()
+        self.assertEqual(saved_companies.count(), 2)
+
+        Company.objects.filter(name='Elite Consortium').delete()
+        saved_companies = Company.objects.all()
+        self.assertEqual(saved_companies.count(), 1)
+
 
 class EmployeeModelTest(TestCase):
 
@@ -68,6 +82,33 @@ class EmployeeModelTest(TestCase):
         self.assertEqual(new_employee_3, all_employees[2])
         self.assertEqual(new_employee_4, all_employees[3])
         self.assertEqual(new_employee_5, all_employees[4])
+    
+    def test_delete_employees(self):
+        new_company_1 = Company(name='Elite Consortium', number_of_randoms=2)
+        new_company_1.save()
+
+        new_company_2 = Company(name='Kind Properties', number_of_randoms=5, number_of_alternates=2)
+        new_company_2.save()
+
+        new_employee_1 = Employee(first_name='Employee', last_name='1', company_name=new_company_1)
+        new_employee_1.save()
+        new_employee_2 = Employee(first_name='Employee', last_name='2', company_name=new_company_2)
+        new_employee_2.save()
+        new_employee_3 = Employee(first_name='Employee', last_name='3', company_name=new_company_1)
+        new_employee_3.save()
+        new_employee_4 = Employee(first_name='Employee', last_name='4', company_name=new_company_2)
+        new_employee_4.save()
+        new_employee_5 = Employee(first_name='Employee', last_name='5', company_name=new_company_1)
+        new_employee_5.save()
+        
+        employee_list = Employee.objects.all()
+        self.assertEqual(employee_list.count(), 5)
+
+        user_to_delete = Employee.objects.filter(first_name='Employee', last_name='3').first()
+        Employee.objects.filter(pk=user_to_delete.pk).delete()
+
+        employee_list = Employee.objects.all()
+        self.assertEqual(employee_list.count(), 4)
 
 
 class CompanyAndEmployeeModelTest(TestCase):
@@ -103,16 +144,25 @@ class CompanyAndEmployeeModelTest(TestCase):
         self.assertEqual(employee_list_2[1].company_name, new_company_2)
 
 
-class TemplateTest(TestCase):
+class ViewAndTemplateTest(TestCase):
 
-    def test_index(self):
+    def test_index_template(self):
         response = self.client.get('/random/')
         self.assertTemplateUsed(response, template_name='RandomPuller/index.html')
 
-    def test_random_puller(self):
-        response = self.client.get('/random/random_puller/')
-        self.assertTemplateUsed(response, template_name='RandomPuller/random_puller.html')
+    def test_company_employees_template(self):
+        response = self.client.get('/random/company/test/')
+        self.assertTemplateUsed(response, template_name='RandomPuller/company_employees.html')
 
-    def test_pulled_employees(self):
-        response = self.client.get('/random/pulled_employees/')
-        self.assertTemplateUsed(response, template_name='RandomPuller/pulled_employees.html')
+    def test_add_company_view(self):
+        pass
+
+    def test_delete_company_view(self):
+        pass
+
+    def test_add_employee_view(self):
+        pass
+
+    def test_delete_employee_view(self):
+        pass
+
