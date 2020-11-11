@@ -1,0 +1,72 @@
+[
+  {
+    "model": "MainSite.NonMemberConsortiumPricing",
+    "pk": 1,
+    "fields": {
+      "service_name": "Drug testing Collection Only",
+      "price": 20.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.NonMemberConsortiumPricing",
+    "pk": 2,
+    "fields": {
+      "service_name": "Rapid Results Drug Test",
+      "price": 30.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.NonMemberConsortiumPricing",
+    "pk": 3,
+    "fields": {
+      "service_name": "Drug testing Observation Fee",
+      "price": 25.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.NonMemberConsortiumPricing",
+    "pk": 4,
+    "fields": {
+      "service_name": "Alcohol testing",
+      "price": 20.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.NonMemberConsortiumPricing",
+    "pk": 5,
+    "fields": {
+      "service_name": "Alcohol Confirmation Testing",
+      "price": 20.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.NonMemberConsortiumPricing",
+    "pk": 6,
+    "fields": {
+      "service_name": "After hours call out fee – meet at the Elite office",
+      "price": 75.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.NonMemberConsortiumPricing",
+    "pk": 7,
+    "fields": {
+      "service_name": "On-Site Fee",
+      "price": 150.00,
+      "extra_cost_text": "Mileage to and from site per mile",
+      "extra_cost": 0.55
+    }
+  }
+]

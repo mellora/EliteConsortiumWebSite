@@ -8,6 +8,9 @@ class Company(models.Model):
     number_of_alternates = models.IntegerField(null=True, blank=True)
 
     class Meta:
+        app_label = 'RandomPuller'
+        verbose_name = 'Company'
+        verbose_name_plural = 'Companies'
         ordering = ['name']
 
     def __str__(self):
@@ -20,6 +23,9 @@ class Employee(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
     class Meta:
+        app_label = 'RandomPuller'
+        verbose_name = 'Employee'
+        verbose_name_plural = 'Employees'
         ordering = ['last_name', 'first_name']
         unique_together = ['first_name', 'last_name', 'company']
 
