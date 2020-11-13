@@ -1,27 +1,24 @@
 {% extends 'RandomPuller/base.html' %}
 
 {% block title %}
-Add Company
+Update Company
 {% endblock %}
 
 {% block content %}
 <div class="col">
     <div class="row">
-        <div class="col text-center">
-            <h1>
-                Add New Company
-            </h1>
+        <div class="col">
+            <h1>Update {{ company.name }}</h1>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <form name="add_company" method="POST" action="{% url 'RandomPuller:add_company' %}">
+            <form name="update_company" method="POST" action="{% url 'RandomPuller:company_update_redirect' company.pk %}">
                 {% csrf_token %}
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group">
-                            {{ form.name.errors }}
-                            {{ form.name.label_tag }}
+                            {{ form.name.label }}
                             {{ form.name }}
                         </div>
                     </div>
@@ -29,18 +26,18 @@ Add Company
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group">
-                            {{ form.number_of_randoms.label_tag }}
+                            {{ form.number_of_randoms.label }}
                             {{ form.number_of_randoms }}
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            {{ form.number_of_alternates.label_tag }}
+                            {{ form.number_of_alternates.label }}
                             {{ form.number_of_alternates }}
                         </div>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-success">
+                <input type="submit" class="btn btn-primary">
             </form>
         </div>
     </div>

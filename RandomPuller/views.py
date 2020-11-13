@@ -83,3 +83,32 @@ def delete_employee(request, pk):
     company = Company.objects.filter(pk=employee.company.pk).first()
     Employee.objects.filter(pk=pk).delete()
     return redirect('RandomPuller:company_employees', name_of_company=company.name.replace(' ', '_'))
+
+
+def update_company(request, pk):
+    company = Company.objects.filter(pk=pk).first()
+    c_form = CompanyForm(
+        initial={
+            'name': company.name,
+            'number_of_randoms': company.number_of_randoms,
+            'number_of_alternates': company.number_of_alternates,
+        }
+    )
+    context = {
+        'company': company,
+        'form': c_form,
+    }
+    return render(request, 'RandomPuller/update_company.html', context)
+
+
+def company_update_redirect(request, pk):
+    if request.method == "POST":
+        form = CompanyForm(request.POST)
+        if form.is_valid():
+            company = Company.objects.filter(pk=pk).first()
+            company.name = form.cleaned_data['name']
+            company.number_of_randoms = form.cleaned_data['number_of_randoms']
+            company.number_of_alternates = form.cleaned_data['number_of_alternates']
+            company.save()
+            return redirect('RandomPuller:company_employees', name_of_company=company.name.replace(' ', '_'))
+    return redirect('RandomPuller:update_company', pk=pk)

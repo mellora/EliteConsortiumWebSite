@@ -7,8 +7,25 @@ Random Puller
 {% block content %}
 <div class="col">
     <div class="row">
+        <div class="col text-center">
+            <h1>{{ company.name }}</h1>
+        </div>
+    </div>
+    <div class="row">
         <div class="col">
-            <h1>{{ company }}</h1>
+            <h4>
+                Number of Randoms: {{ company.number_of_randoms }}
+            </h4>
+        </div>
+        <div class="col">
+            <h4>
+                Number of Alternates: {{ company.number_of_alternates }}
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'RandomPuller:update_company' company.pk %}" class="btn btn-secondary">Update</a>
         </div>
     </div>
     <div class="row">
