@@ -15,4 +15,6 @@ urlpatterns = [
     path('new/company/employee/<int:pk>/', views.new_employee, name='new_employee'),
     path('add/employee/<int:pk>', views.add_employee, name='add_employee'),
     path('delete/employee/<int:pk>', views.delete_employee, name='delete_employee'),
+    path('pull/<int:pk>', views.pull_randoms, name='pull_randoms'),
+    path('pulled/<int:pk>/<uuid:id>/', views.pulled_randoms, name='pulled_randoms'),
 ]

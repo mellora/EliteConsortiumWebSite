@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 import random
 
-from .models import Company, Employee
+from .models import Company, Employee, PulledRandoms
 from .forms import CompanyForm, EmployeeForm
 
 
@@ -111,3 +111,36 @@ def company_update_redirect(request, pk):
             company.save()
             return redirect('RandomPuller:company_employees', pk=company.pk)
     return redirect('RandomPuller:update_company', pk=pk)
+
+
+def pull_randoms(request, pk):
+    company = Company.objects.filter(pk=pk).first()
+    employee_pk_list = Employee.objects.all().values_list('pk', flat=True)
+    try:
+        random_sample = random.sample(list(employee_pk_list), company.get_total_pulls())
+    except ValueError:
+        pass
+    employees = list(Employee.objects.filter(pk__in=random_sample))
+    pulled_randoms_object = PulledRandoms.objects.create()
+
+    for _ in range(company.number_of_randoms):
+        pulled_randoms_object.pulled_randoms.add(employees.pop(0))
+
+    for _ in range(company.number_of_alternates):
+        pulled_randoms_object.pulled_alternates.add(employees.pop(0))
+
+    return redirect('RandomPuller:pulled_randoms', id=pulled_randoms_object.id, pk=pk)
+
+
+def pulled_randoms(request, pk, id):
+    company = Company.objects.filter(pk=pk).first()
+    pulled = PulledRandoms.objects.filter(id=id).first()
+    random_employees = pulled.pulled_randoms.all()
+    alternate_employees = pulled.pulled_alternates.all()
+
+    context = {
+        'company': company,
+        'pulled_randoms': random_employees,
+        'pulled_alternates': alternate_employees,
+    }
+    return render(request, 'RandomPuller/pulled_randoms.html', context)

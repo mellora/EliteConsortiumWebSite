@@ -1,0 +1,68 @@
+{% extends 'RandomPuller/base.html' %}
+
+{% block title %}
+Pulled Randoms for {{ company.name }}
+{% endblock %}
+
+{% block content %}
+<div class="col">
+    <div class="row mb-3">
+        <div class="col">
+            <h1>{{ company.name }}</h1>
+            <h4>Pulled Randoms and Alternates</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Pulled Randoms</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for pulled in pulled_randoms %}
+                    <tr>
+                        <th scope="col">
+                            {{ forloop.counter }}
+                        </th>
+                        <td>
+                            {{ pulled }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Pulled Alternates</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for pulled in pulled_alternates %}
+                    <tr>
+                        <th scope="col">
+                            {{ forloop.counter }}
+                        </th>
+                        <td>
+                            {{ pulled }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
