@@ -135,11 +135,13 @@ def pull_randoms(request, pk):
 def pulled_randoms(request, pk, id):
     company = Company.objects.filter(pk=pk).first()
     pulled = PulledRandoms.objects.filter(id=id).first()
+    date_time_pulled = pulled.date_pulled
     random_employees = pulled.pulled_randoms.all()
     alternate_employees = pulled.pulled_alternates.all()
 
     context = {
         'company': company,
+        'pulled_date': date_time_pulled,
         'pulled_randoms': random_employees,
         'pulled_alternates': alternate_employees,
     }
