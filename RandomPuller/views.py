@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 import random
 
@@ -7,6 +8,7 @@ from .forms import CompanyForm, EmployeeForm
 
 
 # Create your views here.
+@login_required()
 def index(request):
     companies = Company.objects.all()
 
@@ -16,6 +18,7 @@ def index(request):
     return render(request, 'RandomPuller/index.html', context)
 
 
+@login_required()
 def company_employees(request, pk):
     company = Company.objects.filter(pk=pk).first()
     employees = Employee.objects.filter(company=company)
@@ -27,6 +30,7 @@ def company_employees(request, pk):
     return render(request, 'RandomPuller/company_employees.html', context)
 
 
+@login_required()
 def new_company(request):
     c_form = CompanyForm
     context = {
@@ -35,6 +39,7 @@ def new_company(request):
     return render(request, 'RandomPuller/add_company.html', context)
 
 
+@login_required()
 def add_company(request):
     if request.method == "POST":
         form = CompanyForm(request.POST)
@@ -48,11 +53,13 @@ def add_company(request):
     return redirect('RandomPuller:new_company')
 
 
+@login_required()
 def delete_company(request, pk):
     Company.objects.filter(pk=pk).delete()
     return redirect('RandomPuller:index')
 
 
+@login_required()
 def new_employee(request, pk):
     company = Company.objects.filter(pk=pk).first()
     e_form = EmployeeForm
@@ -63,6 +70,7 @@ def new_employee(request, pk):
     return render(request, 'RandomPuller/add_employee.html', context)
 
 
+@login_required()
 def add_employee(request, pk):
     if request.method == "POST":
         form = EmployeeForm(request.POST)
@@ -77,6 +85,7 @@ def add_employee(request, pk):
     return redirect('RandomPuller:new_employee')
 
 
+@login_required()
 def delete_employee(request, pk):
     employee = Employee.objects.filter(pk=pk).first()
     company = Company.objects.filter(pk=employee.company.pk).first()
@@ -84,6 +93,7 @@ def delete_employee(request, pk):
     return redirect('RandomPuller:company_employees', pk=company.pk)
 
 
+@login_required()
 def update_company(request, pk):
     company = Company.objects.filter(pk=pk).first()
     c_form = CompanyForm(
@@ -100,6 +110,7 @@ def update_company(request, pk):
     return render(request, 'RandomPuller/update_company.html', context)
 
 
+@login_required()
 def company_update_redirect(request, pk):
     if request.method == "POST":
         form = CompanyForm(request.POST)
@@ -113,6 +124,7 @@ def company_update_redirect(request, pk):
     return redirect('RandomPuller:update_company', pk=pk)
 
 
+@login_required()
 def pull_randoms(request, pk):
     company = Company.objects.filter(pk=pk).first()
     employee_pk_list = Employee.objects.all().values_list('pk', flat=True)
@@ -132,6 +144,7 @@ def pull_randoms(request, pk):
     return redirect('RandomPuller:pulled_randoms', id=pulled_randoms_object.id, pk=pk)
 
 
+@login_required()
 def pulled_randoms(request, pk, id):
     company = Company.objects.filter(pk=pk).first()
     pulled = PulledRandoms.objects.filter(id=id).first()

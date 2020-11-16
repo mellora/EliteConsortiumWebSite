@@ -11,32 +11,27 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import os
-from dotenv import load_dotenv
 
-from django.core.exceptions import ImproperlyConfigured  # Exception is raised if SECRET_KEY has no value
 from django.core.management.utils import get_random_secret_key  # Used to auto generate a new secret key
+
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load the environment variables from .env file
-load_dotenv(os.path.join(BASE_DIR, '.env'))
+env = environ.Env()
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-try:
-    SECRET_KEY = os.getenv('SECRET_KEY')
-except ImproperlyConfigured:
-    SECRET_KEY = get_random_secret_key()
+SECRET_KEY = env.str('SECRET_KEY', get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', False)
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -119,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = env.str('TIME_ZONE', 'UTC')
 
 USE_I18N = True
 

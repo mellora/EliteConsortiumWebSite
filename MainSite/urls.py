@@ -11,4 +11,6 @@ urlpatterns = [
     path('pricing/', views.pricing, name='pricing'),
     path('did-you-know-dot-requires/', views.did_you_know_dot_requires, name='did_you_know_dot_requires'),
     path('contact-us/', views.contact_us, name='contact_us'),
+    path('accounts/logout/', views.logout_request, name='logout'),
+    path('accounts/login/', views.login_request, name='login'),
 ]
