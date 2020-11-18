@@ -1,6 +1,4 @@
 from django.test import TestCase
-from django.test.client import Client
-from django.contrib.auth.models import User
 from django.urls import reverse
 
 
@@ -30,3 +28,7 @@ class TemplateTests(TestCase):
     def test_contact_us(self):
         response = self.client.get(reverse('MainSite:contact_us'))
         self.assertTemplateUsed(response, 'MainSite/contact_us.html')
+        
+    def test_login_template(self):
+        response = self.client.get(reverse('MainSite:login'))
+        self.assertTemplateUsed(response, 'MainSite/login.html')
