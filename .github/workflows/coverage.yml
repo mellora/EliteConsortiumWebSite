@@ -33,8 +33,13 @@ jobs:
     - name: Get Coverage
       run: |
         coverage json
-    - name: Upload coverage.json Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: Coverage
-        path: coverage.json
+        content=`cat ./coverage.json`
+        echo "::set-output name=coverageJson::$content"
+    - run: |
+        echo "${{ fromJson(stepls.set_var.outputs.coverageJson).totals.percent_covered }}"
+
+#    - name: Upload coverage.json Artifact
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: Coverage
+#        path: coverage.json
