@@ -31,6 +31,7 @@ jobs:
       run: |
         coverage run manage.py test
     - name: Get Coverage
+      id: set_var
       run: |
         coverage json
         content=`cat ./coverage.json`
