@@ -165,26 +165,23 @@ class ViewAndTemplateTest(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user('tester1', 'tester1@test.com', 'testerpass')
+        self.client.login(username='tester1', password='testerpass')
+
+        self.company = Company.objects.create(name='Test Company')
+        self.employee = Employee.objects.create(first_name='Employee 1', last_name='Tester', company=self.company)
 
     def test_index_template(self):
-        self.client.login(username='tester1', password='testerpass')
         response = self.client.get(reverse('RandomPuller:index'))
         self.assertTemplateUsed(response, template_name='RandomPuller/index.html')
 
     def test_company_employees_template(self):
-        # response = self.client.get('/random/company/test/')
-        # self.assertTemplateUsed(response, template_name='RandomPuller/company_employees.html')
-        pass
+        response = self.client.get(reverse('RandomPuller:company_employees', args=[self.company.pk]))
+        self.assertTemplateUsed(response, template_name='RandomPuller/company_employees.html')
 
-    def test_add_company_view(self):
-        pass
+    def test_new_company_template(self):
+        response = self.client.get(reverse('RandomPuller:new_company'))
+        self.assertTemplateUsed(response, template_name='RandomPuller/add_company.html')
 
-    def test_delete_company_view(self):
-        pass
-
-    def test_add_employee_view(self):
-        pass
-
-    def test_delete_employee_view(self):
-        pass
-
+    def test_new_employee_template(self):
+        response = self.client.get(reverse('RandomPuller:new_employee', args=[self.company.pk]))
+        self.assertTemplateUsed(response, template_name='RandomPuller/add_employee.html')
