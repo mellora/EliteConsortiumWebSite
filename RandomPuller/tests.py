@@ -1,4 +1,7 @@
 from django.test import TestCase
+from django.test.client import Client
+from django.contrib.auth.models import User
+from django.urls import reverse
 
 from .models import Company, Employee
 
@@ -56,6 +59,19 @@ class CompanyModelTest(TestCase):
         saved_companies = Company.objects.all()
         self.assertEqual(saved_companies.count(), 1)
 
+    def test_correct_total_pull_number_returned(self):
+        new_company_1 = Company.objects.create(name='Test Company 1', number_of_randoms=2)
+        new_company_2 = Company.objects.create(name='Test Company 2', number_of_randoms=2, number_of_alternates=1)
+        new_company_3 = Company.objects.create(name='Test Company 3', number_of_randoms=4, number_of_alternates=2)
+
+        saved_company_1 = Company.objects.filter(pk=new_company_1.pk).first()
+        saved_company_2 = Company.objects.filter(pk=new_company_2.pk).first()
+        saved_company_3 = Company.objects.filter(pk=new_company_3.pk).first()
+
+        self.assertIs(saved_company_1.get_total_pulls(), 2)
+        self.assertIs(saved_company_2.get_total_pulls(), 3)
+        self.assertIs(saved_company_3.get_total_pulls(), 6)
+
 
 class EmployeeModelTest(TestCase):
 
@@ -63,15 +79,15 @@ class EmployeeModelTest(TestCase):
         test_company = Company(name='Test Company')
         test_company.save()
 
-        new_employee_1 = Employee(first_name='Employee', last_name='1', company_name=test_company)
+        new_employee_1 = Employee(first_name='Employee', last_name='1', company=test_company)
         new_employee_1.save()
-        new_employee_2 = Employee(first_name='Employee', last_name='2', company_name=test_company)
+        new_employee_2 = Employee(first_name='Employee', last_name='2', company=test_company)
         new_employee_2.save()
-        new_employee_3 = Employee(first_name='Employee', last_name='3', company_name=test_company)
+        new_employee_3 = Employee(first_name='Employee', last_name='3', company=test_company)
         new_employee_3.save()
-        new_employee_4 = Employee(first_name='Employee', last_name='4', company_name=test_company)
+        new_employee_4 = Employee(first_name='Employee', last_name='4', company=test_company)
         new_employee_4.save()
-        new_employee_5 = Employee(first_name='Employee', last_name='5', company_name=test_company)
+        new_employee_5 = Employee(first_name='Employee', last_name='5', company=test_company)
         new_employee_5.save()
 
         all_employees = Employee.objects.all()
@@ -90,15 +106,15 @@ class EmployeeModelTest(TestCase):
         new_company_2 = Company(name='Kind Properties', number_of_randoms=5, number_of_alternates=2)
         new_company_2.save()
 
-        new_employee_1 = Employee(first_name='Employee', last_name='1', company_name=new_company_1)
+        new_employee_1 = Employee(first_name='Employee', last_name='1', company=new_company_1)
         new_employee_1.save()
-        new_employee_2 = Employee(first_name='Employee', last_name='2', company_name=new_company_2)
+        new_employee_2 = Employee(first_name='Employee', last_name='2', company=new_company_2)
         new_employee_2.save()
-        new_employee_3 = Employee(first_name='Employee', last_name='3', company_name=new_company_1)
+        new_employee_3 = Employee(first_name='Employee', last_name='3', company=new_company_1)
         new_employee_3.save()
-        new_employee_4 = Employee(first_name='Employee', last_name='4', company_name=new_company_2)
+        new_employee_4 = Employee(first_name='Employee', last_name='4', company=new_company_2)
         new_employee_4.save()
-        new_employee_5 = Employee(first_name='Employee', last_name='5', company_name=new_company_1)
+        new_employee_5 = Employee(first_name='Employee', last_name='5', company=new_company_1)
         new_employee_5.save()
         
         employee_list = Employee.objects.all()
@@ -120,39 +136,45 @@ class CompanyAndEmployeeModelTest(TestCase):
         new_company_2 = Company(name='Kind Properties', number_of_randoms=5, number_of_alternates=2)
         new_company_2.save()
 
-        new_employee_1 = Employee(first_name='Employee', last_name='1', company_name=new_company_1)
+        new_employee_1 = Employee(first_name='Employee', last_name='1', company=new_company_1)
         new_employee_1.save()
-        new_employee_2 = Employee(first_name='Employee', last_name='2', company_name=new_company_1)
+        new_employee_2 = Employee(first_name='Employee', last_name='2', company=new_company_1)
         new_employee_2.save()
-        new_employee_3 = Employee(first_name='Employee', last_name='3', company_name=new_company_2)
+        new_employee_3 = Employee(first_name='Employee', last_name='3', company=new_company_2)
         new_employee_3.save()
-        new_employee_4 = Employee(first_name='Employee', last_name='4', company_name=new_company_1)
+        new_employee_4 = Employee(first_name='Employee', last_name='4', company=new_company_1)
         new_employee_4.save()
-        new_employee_5 = Employee(first_name='Employee', last_name='5', company_name=new_company_2)
+        new_employee_5 = Employee(first_name='Employee', last_name='5', company=new_company_2)
         new_employee_5.save()
 
-        employee_list_1 = Employee.objects.filter(company_name__name='Elite Consortium')
+        employee_list_1 = Employee.objects.filter(company__name='Elite Consortium')
         self.assertEqual(employee_list_1.count(), 3)
 
-        employee_list_2 = Employee.objects.filter(company_name__name='Kind Properties')
+        employee_list_2 = Employee.objects.filter(company__name='Kind Properties')
         self.assertEqual(employee_list_2.count(), 2)
 
-        self.assertEqual(employee_list_1[0].company_name, new_company_1)
-        self.assertEqual(employee_list_1[1].company_name, new_company_1)
-        self.assertEqual(employee_list_1[2].company_name, new_company_1)
-        self.assertEqual(employee_list_2[0].company_name, new_company_2)
-        self.assertEqual(employee_list_2[1].company_name, new_company_2)
+        self.assertEqual(employee_list_1[0].company, new_company_1)
+        self.assertEqual(employee_list_1[1].company, new_company_1)
+        self.assertEqual(employee_list_1[2].company, new_company_1)
+        self.assertEqual(employee_list_2[0].company, new_company_2)
+        self.assertEqual(employee_list_2[1].company, new_company_2)
 
 
 class ViewAndTemplateTest(TestCase):
 
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_user('tester1', 'tester1@test.com', 'testerpass')
+
     def test_index_template(self):
-        response = self.client.get('/random/')
+        self.client.login(username='tester1', password='testerpass')
+        response = self.client.get(reverse('RandomPuller:index'))
         self.assertTemplateUsed(response, template_name='RandomPuller/index.html')
 
     def test_company_employees_template(self):
-        response = self.client.get('/random/company/test/')
-        self.assertTemplateUsed(response, template_name='RandomPuller/company_employees.html')
+        # response = self.client.get('/random/company/test/')
+        # self.assertTemplateUsed(response, template_name='RandomPuller/company_employees.html')
+        pass
 
     def test_add_company_view(self):
         pass
