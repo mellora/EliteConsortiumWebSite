@@ -1,4 +1,4 @@
-name: Coverage.py
+name: Coverage.py Report
 
 on:
   push:
@@ -16,7 +16,8 @@ jobs:
         python-version: [3.x]
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
@@ -29,6 +30,7 @@ jobs:
     - name: Run Coverage Tests
       run: |
         coverage run manage.py test
-    - name: Show Coverage
+    - name: Get Coverage
       run: |
-        coverage report
+        coverage json
+    - run: echo ${{ json }}
