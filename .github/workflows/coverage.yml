@@ -38,9 +38,3 @@ jobs:
         echo "::set-output name=coverageJson::$content"
     - run: |
         echo "${{ fromJson(steps.set_var.outputs.coverageJson).totals.percent_covered }}"
-
-#    - name: Upload coverage.json Artifact
-#      uses: actions/upload-artifact@v2
-#      with:
-#        name: Coverage
-#        path: coverage.json
