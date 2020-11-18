@@ -33,4 +33,4 @@ jobs:
     - name: Get Coverage
       run: |
         coverage json
-    - run: echo ${{ json }}
+    - run: echo ${{ coverage.json }}
