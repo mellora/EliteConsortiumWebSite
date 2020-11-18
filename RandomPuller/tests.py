@@ -3,7 +3,7 @@ from django.test.client import Client
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-from .models import Company, Employee
+from .models import Company, Employee, PulledRandoms
 
 
 # Create your tests here.
@@ -169,6 +169,7 @@ class ViewAndTemplateTest(TestCase):
 
         self.company = Company.objects.create(name='Test Company')
         self.employee = Employee.objects.create(first_name='Employee 1', last_name='Tester', company=self.company)
+        self.pulled = PulledRandoms.objects.create()
 
     def test_index_template(self):
         response = self.client.get(reverse('RandomPuller:index'))
@@ -185,3 +186,11 @@ class ViewAndTemplateTest(TestCase):
     def test_new_employee_template(self):
         response = self.client.get(reverse('RandomPuller:new_employee', args=[self.company.pk]))
         self.assertTemplateUsed(response, template_name='RandomPuller/add_employee.html')
+
+    def test_update_company_template(self):
+        response = self.client.get(reverse('RandomPuller:update_company', args=[self.company.pk]))
+        self.assertTemplateUsed(response, template_name='RandomPuller/update_company.html')
+    
+    def test_pulled_randoms_template(self):
+        response = self.client.get(reverse('RandomPuller:pulled_randoms', args=[self.company.pk, self.pulled.id]))
+        self.assertTemplateUsed(response, template_name='RandomPuller/pulled_randoms.html')
