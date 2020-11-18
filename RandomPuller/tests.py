@@ -160,7 +160,7 @@ class CompanyAndEmployeeModelTest(TestCase):
         self.assertEqual(employee_list_2[1].company, new_company_2)
 
 
-class ViewAndTemplateTest(TestCase):
+class TemplateTests(TestCase):
 
     def setUp(self):
         self.client = Client()

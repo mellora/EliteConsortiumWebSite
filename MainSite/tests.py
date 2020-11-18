@@ -5,27 +5,27 @@ from django.urls import reverse
 # Create your tests here.
 class TemplateTests(TestCase):
 
-    def test_index(self):
+    def test_index_template(self):
         response = self.client.get(reverse('MainSite:index'))
         self.assertTemplateUsed(response, 'MainSite/index.html')
 
-    def test_who_needs_a_consortium(self):
+    def test_who_needs_a_consortium_template(self):
         response = self.client.get(reverse('MainSite:who_needs_a_consortium'))
         self.assertTemplateUsed(response, 'MainSite/who_needs_a_consortium.html')
 
-    def test_what_can_elite_do_for_you(self):
+    def test_what_can_elite_do_for_you_template(self):
         response = self.client.get(reverse('MainSite:what_can_elite_do_for_you'))
         self.assertTemplateUsed(response, 'MainSite/what_can_elite_do_for_you.html')
 
-    def test_pricing(self):
+    def test_pricing_template(self):
         response = self.client.get(reverse('MainSite:pricing'))
         self.assertTemplateUsed(response, 'MainSite/pricing.html')
 
-    def test_did_you_know_dot_requires(self):
+    def test_did_you_know_dot_requires_template(self):
         response = self.client.get(reverse('MainSite:did_you_know_dot_requires'))
         self.assertTemplateUsed(response, 'MainSite/did_you_know_dot_requires.html')
 
-    def test_contact_us(self):
+    def test_contact_us_template(self):
         response = self.client.get(reverse('MainSite:contact_us'))
         self.assertTemplateUsed(response, 'MainSite/contact_us.html')
         
