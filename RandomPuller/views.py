@@ -82,7 +82,7 @@ def add_employee(request, pk):
             employee.company = company
             employee.save()
             return redirect('RandomPuller:company_employees', pk=company.pk)
-    return redirect('RandomPuller:new_employee')
+    return redirect('RandomPuller:new_employee', pk=pk)
 
 
 @login_required()
@@ -128,8 +128,10 @@ def company_update_redirect(request, pk):
 def pull_randoms(request, pk):
     company = Company.objects.filter(pk=pk).first()
     employee_pk_list = Employee.objects.all().values_list('pk', flat=True)
-
-    random_sample = random.sample(list(employee_pk_list), company.get_total_pulls())
+    try:
+        random_sample = random.sample(list(employee_pk_list), company.get_total_pulls())
+    except ValueError:
+        return redirect('RandomPuller:company_employees', pk=pk)
 
     employees = list(Employee.objects.filter(pk__in=random_sample))
     pulled_randoms_object = PulledRandoms.objects.create()
