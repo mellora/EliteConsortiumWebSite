@@ -6,6 +6,7 @@ omit =
     */migrations/*
     */__init__.py
     */tests.py
+    */tests/*
     */urls.py
     */admin.py
     */apps.py
