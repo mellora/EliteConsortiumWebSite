@@ -128,10 +128,9 @@ def company_update_redirect(request, pk):
 def pull_randoms(request, pk):
     company = Company.objects.filter(pk=pk).first()
     employee_pk_list = Employee.objects.all().values_list('pk', flat=True)
-    try:
-        random_sample = random.sample(list(employee_pk_list), company.get_total_pulls())
-    except ValueError:
-        pass
+
+    random_sample = random.sample(list(employee_pk_list), company.get_total_pulls())
+
     employees = list(Employee.objects.filter(pk__in=random_sample))
     pulled_randoms_object = PulledRandoms.objects.create()
 
