@@ -134,7 +134,7 @@ def pull_randoms(request, pk):
         return redirect('RandomPuller:company_employees', pk=pk)
 
     employees = list(Employee.objects.filter(pk__in=random_sample))
-    pulled_randoms_object = PulledRandoms.objects.create()
+    pulled_randoms_object = PulledRandoms.objects.create(pulled_company=company)
 
     for _ in range(company.number_of_randoms):
         pulled_randoms_object.pulled_randoms.add(employees.pop(0))
@@ -160,3 +160,13 @@ def pulled_randoms(request, pk, id):
         'pulled_alternates': alternate_employees,
     }
     return render(request, 'RandomPuller/pulled_randoms.html', context)
+
+
+@login_required()
+def all_pulled(request):
+    all_pulled_randoms = PulledRandoms.objects.all()
+
+    context = {
+        'pulled_list': all_pulled_randoms
+    }
+    return render(request, 'RandomPuller/all_pulled.html', context)

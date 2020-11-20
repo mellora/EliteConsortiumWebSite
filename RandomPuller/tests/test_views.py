@@ -15,7 +15,7 @@ class TemplateTests(TestCase):
 
         self.company = Company.objects.create(name='Test Company')
         self.employee = Employee.objects.create(first_name='Employee 1', last_name='Tester', company=self.company)
-        self.pulled = PulledRandoms.objects.create()
+        self.pulled = PulledRandoms.objects.create(pulled_company=self.company)
 
     def test_index_template(self):
         response = self.client.get(reverse('RandomPuller:index'))
@@ -40,6 +40,10 @@ class TemplateTests(TestCase):
     def test_pulled_randoms_template(self):
         response = self.client.get(reverse('RandomPuller:pulled_randoms', args=[self.company.pk, self.pulled.id]))
         self.assertTemplateUsed(response, template_name='RandomPuller/pulled_randoms.html')
+    
+    def test_all_pulled(self):
+        response = self.client.get(reverse('RandomPuller:all_pulled'))
+        self.assertTemplateUsed(response, template_name='RandomPuller/all_pulled.html')
 
 
 class RedirectTests(TestCase):

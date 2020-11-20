@@ -45,7 +45,17 @@ class PulledRandoms(models.Model):
         default=uuid.uuid4,
         editable=False
     )
+
     date_pulled = models.DateTimeField(auto_now_add=True)
+    pulled_company = models.ForeignKey(Company, on_delete=models.CASCADE, default=None)
     pulled_randoms = models.ManyToManyField(Employee, related_name='pulled_randoms_list')
     pulled_alternates = models.ManyToManyField(Employee, related_name='pulled_alternates_list')
 
+    class Meta:
+        app_label = 'RandomPuller'
+        verbose_name = 'Pulled Random List'
+        verbose_name_plural = 'Pulled Random Lists'
+        ordering = ['pulled_company', 'date_pulled']
+
+    def __str__(self):
+        return f'{self.pulled_company.name}: {self.date_pulled}'
