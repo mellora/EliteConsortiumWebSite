@@ -18,4 +18,5 @@ urlpatterns = [
     path('pull/<int:pk>', views.pull_randoms, name='pull_randoms'),
     path('pulled/<int:pk>/<uuid:id>/', views.pulled_randoms, name='pulled_randoms'),
     path('pulled/', views.all_pulled, name='all_pulled'),
+    path('download/pdf/<uuid:id>/', views.download_pdf, name='download_pdf'),
 ]

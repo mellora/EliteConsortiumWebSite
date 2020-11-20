@@ -1,10 +1,14 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.http import FileResponse
 
+import io
 import random
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
-from .models import Company, Employee, PulledRandoms
 from .forms import CompanyForm, EmployeeForm
+from .models import Company, Employee, PulledRandoms
 
 
 # Create your views here.
@@ -155,6 +159,7 @@ def pulled_randoms(request, pk, id):
 
     context = {
         'company': company,
+        'pulled': pulled,
         'pulled_date': date_time_pulled,
         'pulled_randoms': random_employees,
         'pulled_alternates': alternate_employees,
@@ -170,3 +175,27 @@ def all_pulled(request):
         'pulled_list': all_pulled_randoms
     }
     return render(request, 'RandomPuller/all_pulled.html', context)
+
+
+@login_required()
+def download_pdf(request, id):
+    pulled_list = PulledRandoms.objects.filter(id=id).first()
+    pulled_rands = pulled_list.pulled_randoms.all()
+    pulled_alts = pulled_list.pulled_alternates.all()
+
+    buffer = io.BytesIO()
+
+    p = canvas.Canvas(buffer, pagesize=letter)
+
+    for count, rand in enumerate(pulled_rands, 1):
+        p.drawString(100, count*20, f"{count}: {rand.last_name, rand.first_name}")
+
+    p.showPage()
+    p.save()
+    buffer.seek(0)
+
+    file_prepared_company_name = f'{"_".join(pulled_list.pulled_company.name.split(" "))}'
+    file_prepared_date_time = f'{":".join(str(pulled_list.date_pulled).split(" "))}'
+    file_name = f'{file_prepared_company_name}-{file_prepared_date_time}.pdf'
+
+    return FileResponse(buffer, as_attachment=True, filename=file_name)

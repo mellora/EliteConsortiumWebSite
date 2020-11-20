@@ -65,5 +65,12 @@ Pulled Randoms for {{ company.name }}
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'RandomPuller:download_pdf' pulled.id %}" class="btn btn-success">
+                Download PDF
+            </a>
+        </div>
+    </div>
 </div>
 {% endblock %}
