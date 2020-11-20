@@ -16,12 +16,14 @@ class CompanyForm(ModelForm):
             ),
             'number_of_randoms': forms.NumberInput(
                 attrs={
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'min': 0
                 }
             ),
             'number_of_alternates': forms.NumberInput(
                 attrs={
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'min': 0
                 }
             )
         }
