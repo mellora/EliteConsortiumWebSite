@@ -29,12 +29,14 @@ Add Company
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group">
+                            {{ form.number_of_randoms.errors }}
                             {{ form.number_of_randoms.label_tag }}
                             {{ form.number_of_randoms }}
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
+                            {{ form.number_of_alternates.errors }}
                             {{ form.number_of_alternates.label_tag }}
                             {{ form.number_of_alternates }}
                         </div>

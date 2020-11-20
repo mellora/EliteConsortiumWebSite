@@ -8,7 +8,7 @@
         <div class="form-row">
             <div class="col">
                 <div class="form-group">
-                    <label for="{{ form.username.id_for_label }}">Username:</label>
+                    {{ form.username.label_tag }}
                     {{ form.username }}
                     {{ form.username.errors }}
                 </div>
@@ -17,7 +17,7 @@
         <div class="form-row">
             <div class="col">
                 <div class="form-group">
-                    <label for="{{ form.password.id_for_label }}">Password:</label>
+                    {{ form.password.label_tag }}
                     {{ form.password }}
                     {{ form.password.errors }}
                 </div>

@@ -20,6 +20,7 @@ Add Company
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group">
+                            {{ form.first_name.errors }}
                             {{ form.first_name.label_tag }}
                             {{ form.first_name }}
                         </div>
@@ -28,6 +29,7 @@ Add Company
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group">
+                            {{ form.last_name.errors }}
                             {{ form.last_name.label_tag }}
                             {{ form.last_name }}
                         </div>

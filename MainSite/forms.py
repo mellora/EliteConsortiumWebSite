@@ -4,6 +4,7 @@ from django import forms
 
 
 class UserLoginForm(AuthenticationForm):
+
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
 
@@ -11,7 +12,6 @@ class UserLoginForm(AuthenticationForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'id': 'id_username'
             }
         )
     )
@@ -20,7 +20,6 @@ class UserLoginForm(AuthenticationForm):
         widget=forms.PasswordInput(
             attrs={
                 'class': 'form-control',
-                'id': 'id_password'
             }
         )
     )
