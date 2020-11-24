@@ -167,7 +167,6 @@ def pulled_randoms(request, pk, id):
     return render(request, 'RandomPuller/pulled_randoms.html', context)
 
 
-@login_required()
 def all_pulled(request):
     all_pulled_randoms = PulledRandoms.objects.all()
 
