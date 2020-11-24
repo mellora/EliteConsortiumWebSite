@@ -194,7 +194,8 @@ def download_pdf(request, id):
     buffer.seek(0)
 
     file_prepared_company_name = f'{"_".join(pulled_list.pulled_company.name.split(" "))}'
-    file_prepared_date_time = f'{":".join(str(pulled_list.date_pulled).split(" "))}'
+    date_format = '%b-%d-%Y'
+    file_prepared_date_time = f'{":".join(str(pulled_list.date_pulled.date().strftime(date_format)).split(" "))}'
     file_name = f'{file_prepared_company_name}-{file_prepared_date_time}.pdf'
 
     return FileResponse(buffer, as_attachment=True, filename=file_name)
