@@ -4,11 +4,18 @@ from django.http import FileResponse
 
 import io
 import random
+
+from reportlab.lib.enums import TA_JUSTIFY
 from reportlab.lib.pagesizes import letter
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 
 from .forms import CompanyForm, EmployeeForm
 from .models import Company, Employee, PulledRandoms
+
+from EliteConsortiumWebSite.settings import TIME_ZONE
 
 
 # Create your views here.
@@ -182,20 +189,44 @@ def download_pdf(request, id):
     pulled_rands = pulled_list.pulled_randoms.all()
     pulled_alts = pulled_list.pulled_alternates.all()
 
-    buffer = io.BytesIO()
+    pdf_buffer = io.BytesIO()
 
-    p = canvas.Canvas(buffer, pagesize=letter)
+    doc = SimpleDocTemplate(
+        pdf_buffer,
+        rightMargin=72,
+        leftMargin=72,
+        topMargin=72,
+        bottomMargin=72,
+        pagesize=letter
+    )
 
-    for count, rand in enumerate(pulled_rands, 1):
-        p.drawString(100, count*20, f"{count}: {rand.last_name, rand.first_name}")
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
 
-    p.showPage()
-    p.save()
-    buffer.seek(0)
+    date_pulled = pulled_list.get_local_date()
+    time_pulled = pulled_list.get_local_time()
+
+    elements = [Paragraph(f'Pulled Randoms for {pulled_list.pulled_company.name}', styles['Heading1']),
+                Paragraph(
+                    f'Pulled on: {date_pulled} at {time_pulled}',
+                    styles['Heading2']),
+                Paragraph(f'Randoms:', styles['Heading3'])]
+    for count, rand in enumerate(pulled_rands, start=1):
+        elements.append(Paragraph(f'{count}: {rand.last_name}, {rand.first_name}', styles['Justify']))
+
+    elements.append(Spacer(1, 12))
+
+    elements.append(Paragraph(f'Alternates:', styles['Heading3']))
+    for count, alt in enumerate(pulled_alts, start=1):
+        elements.append(Paragraph(f'{count}: {alt.last_name}, {alt.first_name}', styles['Justify']))
+
+    doc.build(elements)
+
+    pdf_buffer.seek(0)
 
     file_prepared_company_name = f'{"_".join(pulled_list.pulled_company.name.split(" "))}'
     date_format = '%b-%d-%Y'
     file_prepared_date_time = f'{":".join(str(pulled_list.date_pulled.date().strftime(date_format)).split(" "))}'
     file_name = f'{file_prepared_company_name}-{file_prepared_date_time}.pdf'
 
-    return FileResponse(buffer, as_attachment=True, filename=file_name)
+    return FileResponse(pdf_buffer, as_attachment=True, filename=file_name)
