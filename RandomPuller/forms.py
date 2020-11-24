@@ -11,19 +11,20 @@ class CompanyForm(ModelForm):
         widgets = {
             'name': forms.TextInput(
                 attrs={
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autofocus': 'autofocus',
                 }
             ),
             'number_of_randoms': forms.NumberInput(
                 attrs={
                     'class': 'form-control',
-                    'min': 0
+                    'min': 0,
                 }
             ),
             'number_of_alternates': forms.NumberInput(
                 attrs={
                     'class': 'form-control',
-                    'min': 0
+                    'min': 0,
                 }
             )
         }
@@ -36,12 +37,13 @@ class EmployeeForm(ModelForm):
         widgets = {
             'first_name': forms.TextInput(
                 attrs={
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autofocus': 'autofocus',
                 }
             ),
             'last_name': forms.TextInput(
                 attrs={
-                    'class': 'form-control'
+                    'class': 'form-control',
                 }
             ),
         }
