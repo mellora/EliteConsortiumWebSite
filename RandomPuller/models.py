@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 
+from django.utils import timezone
+
 import uuid
 
 
@@ -59,3 +61,9 @@ class PulledRandoms(models.Model):
 
     def __str__(self):
         return f'{self.pulled_company.name}: {self.date_pulled}'
+
+    def get_local_date(self, date_format='%b %d, %Y'):
+        return timezone.localtime(self.date_pulled).date().strftime(date_format)
+
+    def get_local_time(self, time_format='%I:%M %p'):
+        return timezone.localtime(self.date_pulled).time().strftime(time_format)
