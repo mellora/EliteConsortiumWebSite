@@ -189,22 +189,22 @@ def download_pdf(request, id):
     pulled_rands = pulled_list.pulled_randoms.all()
     pulled_alts = pulled_list.pulled_alternates.all()
 
+    date_pulled = pulled_list.get_local_date()
+    time_pulled = pulled_list.get_local_time()
+
     pdf_buffer = io.BytesIO()
 
     doc = SimpleDocTemplate(
         pdf_buffer,
-        rightMargin=72,
-        leftMargin=72,
-        topMargin=72,
-        bottomMargin=72,
+        rightMargin=0.5 * inch,
+        leftMargin=0.5 * inch,
+        topMargin=0.5 * inch,
+        bottomMargin=0.5 * inch,
         pagesize=letter
     )
 
     styles = getSampleStyleSheet()
     styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
-
-    date_pulled = pulled_list.get_local_date()
-    time_pulled = pulled_list.get_local_time()
 
     elements = [Paragraph(f'Pulled Randoms for {pulled_list.pulled_company.name}', styles['Heading1']),
                 Paragraph(
