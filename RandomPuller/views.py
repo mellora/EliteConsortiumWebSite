@@ -131,7 +131,7 @@ def company_update_redirect(request, pk):
 @login_required()
 def pull_randoms(request, pk):
     company = Company.objects.filter(pk=pk).first()
-    employee_pk_list = Employee.objects.all().values_list('pk', flat=True)
+    employee_pk_list = Employee.objects.filter(company=company).values_list('pk', flat=True)
     try:
         random_sample = random.sample(list(employee_pk_list), company.get_total_pulls())
     except ValueError:
