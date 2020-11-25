@@ -153,7 +153,6 @@ def pull_randoms(request, pk):
     return redirect('RandomPuller:pulled_randoms', id=pulled_randoms_object.id, pk=pk)
 
 
-@login_required()
 def pulled_randoms(request, pk, id):
     company = Company.objects.filter(pk=pk).first()
     pulled = PulledRandoms.objects.filter(id=id).first()
@@ -171,6 +170,7 @@ def pulled_randoms(request, pk, id):
     return render(request, 'RandomPuller/pulled_randoms.html', context)
 
 
+@login_required()
 def all_pulled(request):
     all_pulled_randoms = PulledRandoms.objects.all()
 
