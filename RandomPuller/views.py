@@ -197,16 +197,21 @@ def download_pdf(request, id):
         leftMargin=0.5 * inch,
         topMargin=0.5 * inch,
         bottomMargin=0.5 * inch,
-        pagesize=letter
+        pagesize=letter,
+        title=f'{pulled_list.pulled_company.name}: {date_pulled}'
     )
 
     styles = getSampleStyleSheet()
     styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
 
+    list_url = request.build_absolute_uri(
+        reverse("RandomPuller:pulled_randoms", args=[pulled_list.pulled_company.pk, pulled_list.id]))
+
     elements = [Paragraph(f'Pulled Randoms for {pulled_list.pulled_company.name}', styles['Heading1']),
-                Paragraph(
-                    f'Pulled on: {date_pulled} at {time_pulled}',
-                    styles['Heading2']),
+                Paragraph(f'Pulled on: {date_pulled} at {time_pulled}', styles['Heading2']),
+                Spacer(1, 12),
+                Paragraph(f'<link href="{list_url}">List from site</link>', styles['BodyText']),
+                Spacer(1, 12),
                 Paragraph(f'Randoms:', styles['Heading3'])]
     for count, rand in enumerate(pulled_rands, start=1):
         elements.append(Paragraph(f'{count}: {rand.last_name}, {rand.first_name}', styles['Justify']))
