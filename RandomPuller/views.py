@@ -9,13 +9,10 @@ from reportlab.lib.enums import TA_JUSTIFY
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
-from reportlab.pdfgen import canvas
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 
 from .forms import CompanyForm, EmployeeForm
 from .models import Company, Employee, PulledRandoms
-
-from EliteConsortiumWebSite.settings import TIME_ZONE
 
 
 # Create your views here.
