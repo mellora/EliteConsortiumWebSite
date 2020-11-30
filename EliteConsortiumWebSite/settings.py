@@ -59,7 +59,7 @@ MIDDLEWARE = [
 ]
 
 MIDDLEWARE_CLASSES = (
-    'whitenoise.middleware.WhiteNoiseMiddleware'
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 )
 
 ROOT_URLCONF = 'EliteConsortiumWebSite.urls'
@@ -129,7 +129,7 @@ STATIC_ROOT = path.join(BASE_DIR,  'static')
 
 
 STATICFILES_DIRS = (
-    path.join(BASE_DIR, 'static')
+    path.join(BASE_DIR, 'static'),
 )
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
