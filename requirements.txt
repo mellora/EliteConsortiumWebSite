@@ -2,3 +2,4 @@ django
 reportlab
 psycopg2
 gunicorn
+dj-database-url

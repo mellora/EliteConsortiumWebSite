@@ -15,6 +15,7 @@ from pathlib import Path
 from django.core.management.utils import get_random_secret_key  # Used to auto generate a new secret key
 
 from os import environ
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,12 +80,9 @@ WSGI_APPLICATION = 'EliteConsortiumWebSite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = {'default': dj_database_url.config(default=f'sqlite:///{BASE_DIR}/db.sqlite3')}
+
+print(DATABASES['default']['ENGINE'])
 
 
 # Password validation
