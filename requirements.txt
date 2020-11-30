@@ -1,5 +1,4 @@
 django
-django-environ
 reportlab
 psycopg2
 gunicorn

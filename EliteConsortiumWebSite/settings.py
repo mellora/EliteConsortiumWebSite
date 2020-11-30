@@ -14,22 +14,21 @@ from pathlib import Path
 
 from django.core.management.utils import get_random_secret_key  # Used to auto generate a new secret key
 
-import environ
+from os import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-env = environ.Env()
-environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str('SECRET_KEY', get_random_secret_key())
+SECRET_KEY = environ.get('SECRET_KEY', get_random_secret_key())
+
+print(SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', False)
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -114,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = env.str('TIME_ZONE', 'UTC')
+TIME_ZONE = "America/Chicago"
 
 USE_I18N = True
 
