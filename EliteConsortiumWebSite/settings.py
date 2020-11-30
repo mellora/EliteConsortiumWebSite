@@ -14,7 +14,7 @@ from pathlib import Path
 
 from django.core.management.utils import get_random_secret_key  # Used to auto generate a new secret key
 
-from os import environ
+from os import environ, path
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -124,4 +124,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = path.join(BASE_DIR,  'static')
+
+
+STATICFILES_DIRS = (
+    path.join(BASE_DIR, 'static')
+)
