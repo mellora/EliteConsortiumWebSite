@@ -1,1 +1,1 @@
-web: gunicorn EliteConsortium.wsgi
+web: gunicorn EliteConsortiumWebSite.wsgi
