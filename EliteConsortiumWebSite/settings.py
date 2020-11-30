@@ -30,7 +30,7 @@ SECRET_KEY = environ.get('SECRET_KEY', get_random_secret_key())
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
+    '.herokuapp.com',
 ]
 
 # Application definition
