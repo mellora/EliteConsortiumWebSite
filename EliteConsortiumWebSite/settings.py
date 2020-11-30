@@ -58,6 +58,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+MIDDLEWARE_CLASSES = (
+    'whitenoise.middleware.WhiteNoiseMiddleware'
+)
+
 ROOT_URLCONF = 'EliteConsortiumWebSite.urls'
 
 TEMPLATES = [
@@ -83,9 +87,6 @@ WSGI_APPLICATION = 'EliteConsortiumWebSite.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {'default': dj_database_url.config(default=f'sqlite:///{BASE_DIR}/db.sqlite3')}
-
-print(DATABASES['default']['ENGINE'])
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -130,3 +131,5 @@ STATIC_ROOT = path.join(BASE_DIR,  'static')
 STATICFILES_DIRS = (
     path.join(BASE_DIR, 'static')
 )
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
