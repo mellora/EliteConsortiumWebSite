@@ -1,0 +1,72 @@
+[
+  {
+    "model": "MainSite.ThirdPartyProgramSupportFees",
+    "pk": 1,
+    "fields": {
+      "service": "TivaCloud",
+      "charge_rate": "per month",
+      "driver_num": "1-25",
+      "price": 20.00
+    }
+  },
+  {
+    "model": "MainSite.ThirdPartyProgramSupportFees",
+    "pk": 2,
+    "fields": {
+      "service": "TivaCloud",
+      "charge_rate": "per month",
+      "driver_num": "26-50",
+      "price": 30.00
+    }
+  },
+  {
+    "model": "MainSite.ThirdPartyProgramSupportFees",
+    "pk": 3,
+    "fields": {
+      "service": "TPS Alerts",
+      "charge_rate": "per month",
+      "driver_num": "1-25",
+      "price": 20.00
+    }
+  },
+  {
+    "model": "MainSite.ThirdPartyProgramSupportFees",
+    "pk": 4,
+    "fields": {
+      "service": "TPS Alerts",
+      "charge_rate": "per month",
+      "driver_num": "26-50",
+      "price": 30.00
+    }
+  },
+  {
+    "model": "MainSite.ThirdPartyProgramSupportFees",
+    "pk": 5,
+    "fields": {
+      "service": "NCMS",
+      "charge_rate": "Original set up done by Elite*",
+      "driver_num": "",
+      "price": 150.00
+    }
+  },
+  {
+    "model": "MainSite.ThirdPartyProgramSupportFees",
+    "pk": 6,
+    "fields": {
+      "service": "NCMS",
+      "charge_rate": "per month",
+      "driver_num": "1-25",
+      "price": 20.00
+    }
+  },
+  {
+    "model": "MainSite.ThirdPartyProgramSupportFees",
+    "pk": 7,
+    "fields": {
+      "service": "NCMS",
+      "charge_rate": "per month",
+      "driver_num": "26-50",
+      "price": 30.00
+    }
+  }
+]

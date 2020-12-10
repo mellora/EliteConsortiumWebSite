@@ -1,0 +1,45 @@
+{% extends 'RandomPuller/base.html' %}
+
+{% block title %}
+Update Company
+{% endblock %}
+
+{% block content %}
+<div class="col">
+    <div class="row">
+        <div class="col">
+            <h1>Update {{ company.name }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form name="update_company" method="POST" action="{% url 'RandomPuller:company_update_redirect' company.pk %}">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            {{ form.name.label }}
+                            {{ form.name }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            {{ form.number_of_randoms.label }}
+                            {{ form.number_of_randoms }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            {{ form.number_of_alternates.label }}
+                            {{ form.number_of_alternates }}
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

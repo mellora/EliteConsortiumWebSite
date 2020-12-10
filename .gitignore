@@ -117,7 +117,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+EliteConsortiumWebSite/.env
 .venv
 env/
 venv/
@@ -314,3 +314,6 @@ modules.xml
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/python,django,pycharm+all,visualstudiocode
+
+static/*
+staticfiles/*

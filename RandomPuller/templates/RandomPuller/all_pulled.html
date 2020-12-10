@@ -1,0 +1,46 @@
+{% extends 'RandomPuller/base.html' %}
+
+{% block title %}
+Pulled Groups
+{% endblock %}
+
+{% block content %}
+<div class="col">
+    <div class="row">
+        <div class="col">
+            <h1>All Pulled Random Lists</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-borderless">
+                <thead>
+                <tr>
+                    <th scope="col">Company</th>
+                    <th scope="col">Date</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for list in pulled_list %}
+                <tr>
+                    <td>
+                        {{ list.pulled_company.name }}
+                    </td>
+                    <td>
+                        {{ list.date_pulled }}
+                    </td>
+                    <td>
+                        <a href="{% url 'RandomPuller:pulled_randoms' list.pulled_company.pk list.id %}"
+                           class="btn btn-secondary">
+                            Go To
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

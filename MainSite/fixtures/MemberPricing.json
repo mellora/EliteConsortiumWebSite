@@ -1,0 +1,112 @@
+[
+  {
+    "model": "MainSite.MemberConsortiumPricing",
+    "pk": 1,
+    "fields": {
+      "service_name": "Program yearly fee to be billed on the anniversary date",
+      "min_price": 150.00,
+      "max_price": 150.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.MemberConsortiumPricing",
+    "pk": 2,
+    "fields": {
+      "service_name": "DER services per month",
+      "min_price": 25.00,
+      "max_price": 25.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.MemberConsortiumPricing",
+    "pk": 3,
+    "fields": {
+      "service_name": "Drug testing – In house",
+      "min_price": 50.00,
+      "max_price": 50.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.MemberConsortiumPricing",
+    "pk": 4,
+    "fields": {
+      "service_name": "Drug testing not done at out facility (We cover collection fees)",
+      "min_price": 65.00,
+      "max_price": 85.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.MemberConsortiumPricing",
+    "pk": 5,
+    "fields": {
+      "service_name": "Drug testing lab fee (Company pays for Collection fees at facility)",
+      "min_price": 30.00,
+      "max_price": 30.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.MemberConsortiumPricing",
+    "pk": 6,
+    "fields": {
+      "service_name": "Rapid Results Drug Test – In house",
+      "min_price": 30.00,
+      "max_price": 30.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.MemberConsortiumPricing",
+    "pk": 7,
+    "fields": {
+      "service_name": "Drug testing Observation Fee – In house",
+      "min_price": 25.00,
+      "max_price": 25.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.MemberConsortiumPricing",
+    "pk": 8,
+    "fields": {
+      "service_name": "Alcohol testing – In house",
+      "min_price": 25.00,
+      "max_price": 25.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.MemberConsortiumPricing",
+    "pk": 9,
+    "fields": {
+      "service_name": "After hours call out fee – meet at the Elite office",
+      "min_price": 75.00,
+      "max_price": 75.00,
+      "extra_cost_text": "",
+      "extra_cost": 0
+    }
+  },
+  {
+    "model": "MainSite.MemberConsortiumPricing",
+    "pk": 10,
+    "fields": {
+      "service_name": "On-Site Fee",
+      "min_price": 150.00,
+      "max_price": 150.00,
+      "extra_cost_text": "Mileage to and from site per mile",
+      "extra_cost": 0.55
+    }
+  }
+]

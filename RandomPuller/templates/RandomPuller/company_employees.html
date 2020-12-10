@@ -1,0 +1,65 @@
+{% extends 'RandomPuller/base.html' %}
+
+{% block title %}
+Random Puller
+{% endblock %}
+
+{% block content %}
+<div class="col">
+    <div class="row mb-1">
+        <div class="col text-center">
+            <h1>{{ company.name }}</h1>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col text-center">
+            <h4>
+                Number of Randoms: {{ company.number_of_randoms }}
+            </h4>
+        </div>
+        <div class="col text-center">
+            <h4>
+                Number of Alternates: {{ company.number_of_alternates }}
+            </h4>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col text-center">
+            <a href="{% url 'RandomPuller:update_company' company.pk %}" class="btn btn-secondary">Update</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                <tr class="row">
+                    <th class="col">Last Name:</th>
+                    <th class="col">First Name:</th>
+                    <th class="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for employee in employees %}
+                <tr class="row">
+                    <td class="col">{{ employee.last_name }}</td>
+                    <td class="col">{{ employee.first_name }}</td>
+                    <td class="col">
+                        <a href="{% url 'RandomPuller:delete_employee' employee.pk %}"
+                           class="btn btn-warning">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'RandomPuller:new_employee' company.pk %}" class="btn btn-primary">Add New Employee</a>
+        </div>
+        <div class="col">
+            <a href="{% url 'RandomPuller:pull_randoms' company.pk %}" class="btn btn-primary">Pull</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
